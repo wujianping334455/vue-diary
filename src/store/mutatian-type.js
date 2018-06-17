@@ -1,0 +1,1 @@
+export const TOP_INFOS = 'top_Infos';
