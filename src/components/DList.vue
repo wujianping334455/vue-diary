@@ -36,6 +36,7 @@
 
 <script>
 import {mapGetters,mapActions,mapMutations} from 'vuex';
+import { Buried } from '@/decorators';
 import axios from 'axios';
 export default {
   data () {
@@ -44,7 +45,7 @@ export default {
     }
   },
   computed : mapGetters(['list']),
-  methods:{
+  @Buried methods:{
     _$init(){},
     listDepart(item){
       // axios加载用户信息
