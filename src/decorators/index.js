@@ -16,18 +16,18 @@ export function Buried(target, funcName, descriptor) {
     if(target.methods) {
         for(let name in target.methods) {
             target.methods[name] = function () {
-            let result = oriMethods[name].call(this,...arguments);
-            // 如果方法中返回 noBuried 则不添加埋点
-            if(typeof result === 'string' && result.includes('noBuried')) {
-                console.log(name + '方法设置不添加埋点');
-            } else if(result instanceof Promise) {
-                result.then(res => {
-                    if(typeof res === 'string' && res.includes('noBuried')) { console.log(name + '方法设置不添加埋点'); return; };
+                let result = oriMethods[name].call(this,...arguments);
+                // 如果方法中返回 noBuried 则不添加埋点
+                if(typeof result === 'string' && result.includes('noBuried')) {
+                    console.log(name + '方法设置不添加埋点');
+                } else if(result instanceof Promise) {
+                    result.then(res => {
+                        if(typeof res === 'string' && res.includes('noBuried')) { console.log(name + '方法设置不添加埋点'); return; };
+                        console.log('添加埋点在methods方法中：' , name.toUpperCase ());
+                    });
+                }else{
                     console.log('添加埋点在methods方法中：' , name.toUpperCase ());
-                });
-            }else{
-                console.log('添加埋点在methods方法中：' , name.toUpperCase ());
-            };
+                };
                 return result;
             }
         }
